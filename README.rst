@@ -1,3 +1,6 @@
+`language-check` dependency is abandonware. This repo updates original repo to use new `language-check` package.
+
+
 PyContractions
 ==============
 
@@ -57,18 +60,18 @@ Example usage
 .. code:: python
 
     >>> from pycontractions import Contractions
-    
+
     # Load your favorite semantic vector model in gensim keyedvectors format from disk
     >>> cont = Contractions('GoogleNews-vectors-negative300.bin')
-    
+
     # or specify any model from the gensim.downloader api
     >>> cont = Contractions(api_key="glove-twitter-100")
-    
+
     # or train or load your own keyedvectors model and pass it in
     >>> cont = Contractions(kv_model=mykvmodel)
-    
+
     # optional, prevents loading on first expand_texts call
-    >>> cont.load_models() 
+    >>> cont.load_models()
 
 The faster less precise version is the default:
 
@@ -79,7 +82,7 @@ The faster less precise version is the default:
                                 "Theyre going to the zoo and she'll be home for dinner."]))
      [u'I had like to know how I had done that!',
       u'we are going to the zoo and I do not think I will be home for dinner.',
-      u'they are going to the zoo and she will be home for dinner.']    
+      u'they are going to the zoo and she will be home for dinner.']
 
 Notice the error in the first text is correct below when using ``precise=True``:
 
@@ -113,21 +116,21 @@ Performance differences using the ``precise`` version on an Intel(R) Core(TM) i7
 
     >>> cont = Contractions(api_key="glove-twitter-25")
     >>> cont.load_models()
-    
+
     >>> text = "Theyre going to the zoo and she'll be home for dinner."
     >>> %timeit list(cont.expand_texts([text]))
     10 loops, best of 3: 21.4 ms per loop
     >>> %timeit list(cont.expand_texts([text], precise=True))
     10 loops, best of 3: 25.1 ms per loop
-    
-    # A 349 word movie review    
+
+    # A 349 word movie review
     >>> len(text.split())
     349
     >>> %timeit list(cont.expand_texts([text]))
     1 loop, best of 3: 1.17 s per loop
     >>> %timeit list(cont.expand_texts([text], precise=True))
     1 loop, best of 3: 2.88 s per loop
-    
+
     # Contraction is fast, same 349 word movie review
     >>> %timeit list(cont.contract_texts([text]))
     100 loops, best of 3: 4.77 ms per loop
@@ -148,6 +151,6 @@ Prerequisites
 - `language-check <https://github.com/myint/language-check>`_
 - `gensim <http://radimrehurek.com/gensim/>`_
 
-language-check depends on the Java `LanguageTool <https://www.languagetool.org>`_ package, 
-therefore this package depends on it (and Java 6.0+).  The language-check installer *should* take care of 
+language-check depends on the Java `LanguageTool <https://www.languagetool.org>`_ package,
+therefore this package depends on it (and Java 6.0+).  The language-check installer *should* take care of
 downloading it for you, but it may take several minutes depending on internet connection.
